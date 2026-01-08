@@ -95,95 +95,94 @@ DB_URL = "postgresql://admin:secretpass@localhost:5432/mydb"
 ```
 
 ### Вывод:
-```bash
-🔍 Scanning examples/ex_1.py...
-
+```
 ================================================================================
-🔒 Security Linter Results
+Security Scan Results
 ================================================================================
 
-Total issues found: 13
-  🔴 Critical: 6
-  🔴 High: 5
-  🟡 Medium: 2
-  🔵 Low: 0
+Total issues: 13
+  Critical: 6
+  High: 5
+  Medium: 2
+  Low: 0
 
 
-📄 /Users/andre/PycharmProjects/seclint/examples/ex_1.py
+/Users/andre/PycharmProjects/seclint/examples/ex_1.py
 --------------------------------------------------------------------------------
 
-🔴 [CRITICAL] hardcoded_secret
-   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:8
+[CRITICAL] hardcoded_secret
+   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:5
    Stripe Live Secret Key found
-   Code: API_KEY = "sk_live_51H8xKj2eZvKYlo2CTEST123"
+  Code: API_KEY = "sk_live_51H8xKj2eZvKYlo2CTEST123"
 
-🔴 [HIGH] hardcoded_secret
-   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:8
+[HIGH] hardcoded_secret
+   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:5
    Generic API key found
-   Code: API_KEY = "sk_live_51H8xKj2eZvKYlo2CTEST123"
+  Code: API_KEY = "sk_live_51H8xKj2eZvKYlo2CTEST123"
 
-🔴 [CRITICAL] hardcoded_secret
-   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:9
+[CRITICAL] hardcoded_secret
+   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:6
    AWS Access Key ID found
-   Code: AWS_KEY = "AKIA1234567890ABCDEF"
+  Code: AWS_KEY = "AKIA1234567890ABCDEF"
 
-🔴 [HIGH] hardcoded_secret
-   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:10
+[HIGH] hardcoded_secret
+   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:7
    Hardcoded password found
-   Code: password = "admin12345"
+  Code: password = "admin12345"
 
-🟡 [MEDIUM] weak_crypto
-   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:14
+[MEDIUM] weak_crypto
+   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:11
    MD5 is cryptographically broken
-   Code: hashlib.md5(data.encode())
-   💡 Use SHA-256 or SHA-3
+  Code: hashlib.md5(data.encode())
+  Fix: Use SHA-256 or SHA-3
 
-🟡 [MEDIUM] weak_crypto
-   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:17
+[MEDIUM] weak_crypto
+   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:14
    SHA-1 is deprecated
-   Code: hashlib.sha1(data)
-   💡 Use SHA-256 or SHA-3
+  Code: hashlib.sha1(data)
+  Fix: Use SHA-256 or SHA-3
 
-🔴 [CRITICAL] dangerous_function
-   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:21
+[CRITICAL] dangerous_function
+   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:18
    eval() executes arbitrary code
-   Code: eval(user_input)
-   💡 Use ast.literal_eval() for safe evaluation
+  Code: eval(user_input)
+  Fix: Use ast.literal_eval() for safe evaluation
 
-🔴 [CRITICAL] dangerous_function
-   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:25
+[CRITICAL] dangerous_function
+   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:22
    exec() executes arbitrary code
-   Code: exec(code)
-   💡 Avoid exec(). Refactor logic
+  Code: exec(code)
+  Fix: Avoid exec(). Refactor logic
 
-🔴 [HIGH] command_injection
-   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:29
+[HIGH] command_injection
+   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:26
    subprocess with shell=True is dangerous
-   Code: subprocess.run(f"cat {filename}", shell=True)
-   💡 Use shell=False and pass args as list
+  Code: subprocess.run(f"cat {filename}", shell=True)
+  Fix: Use shell=False and pass args as list
 
-🔴 [CRITICAL] sql_injection
-   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:33
+[CRITICAL] sql_injection
+   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:30
    Potential SQL injection via f-string
-   Code: f"SELECT * FROM users WHERE id = {user_id}"
-   💡 Use parameterized queries
+  Code: f"SELECT * FROM users WHERE id = {user_id}"
+  Fix: Use parameterized queries
 
-🔴 [CRITICAL] hardcoded_secret
-   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:37
+[CRITICAL] hardcoded_secret
+   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:34
    Discord Bot Token found
-   Code: token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_...
+  Code: token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_...
 
-🔴 [HIGH] hardcoded_secret
-   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:37
+[HIGH] hardcoded_secret
+   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:34
    JWT token found
-   Code: token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_...
+  Code: token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_...
 
-🔴 [HIGH] hardcoded_secret
-   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:40
+[HIGH] hardcoded_secret
+   → /Users/andre/PycharmProjects/seclint/examples/ex_1.py:37
    Database URL with credentials
-   Code: DB_URL = "postgresql://admin:secretpass@localhost:5432/mydb"
+  Code: DB_URL = "postgresql://admin:secretpass@localhost:5432/mydb"
 
 ================================================================================
-⚠️  Found critical/high severity issues - fix them ASAP!
+WARNING: Found critical/high severity issues
 ================================================================================
+
 ```
