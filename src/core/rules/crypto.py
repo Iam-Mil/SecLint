@@ -1,15 +1,4 @@
-"""
-Правила для обнаружения слабой / устаревшей криптографии
-
-MD5, SHA1 — считаются криптографически сломанными.
-DES, RC4 — устарели и небезопасны.
-ECB — заведомо небезопасен.
-Base64 ≠ шифрование.
-Ключи, захардкоженные в коде — критическая уязвимость.
-"""
-
 WEAK_CRYPTO_FUNCTIONS = {
-    # ---- Слабые хеши ----
     'md5': {
         'severity': 'MEDIUM',
         'message': 'MD5 is cryptographically broken',
@@ -34,7 +23,6 @@ WEAK_CRYPTO_FUNCTIONS = {
         'recommendation': 'Use SHA-256 instead'
     },
 
-    # ---- Слабые и устаревшие шифры ----
     'des': {
         'severity': 'HIGH',
         'message': 'DES is obsolete',
@@ -71,7 +59,6 @@ WEAK_CRYPTO_FUNCTIONS = {
         'recommendation': 'Use AES'
     },
 
-    # ---- Ошибки в использовании криптографии ----
     'base64_encoding': {
         'severity': 'LOW',
         'message': 'Base64 is not encryption',
@@ -91,8 +78,6 @@ WEAK_CRYPTO_FUNCTIONS = {
     },
 }
 
-
-# ---- Небезопасные режимы шифрования ----
 WEAK_CRYPTO_MODES = {
     'ECB': {
         'severity': 'HIGH',

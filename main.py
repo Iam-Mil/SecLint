@@ -7,7 +7,6 @@ from src.reporters.console import ConsoleReporter
 
 
 def main():
-
     parser = argparse.ArgumentParser(
         description='Security Linter - find vulnerabilities in Python code',
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -43,7 +42,6 @@ Examples:
 
 
 def scan_target(target: str, min_severity: str = None):
-
     target_path = Path(target)
 
     if not target_path.exists():

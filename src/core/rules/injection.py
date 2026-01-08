@@ -1,14 +1,4 @@
-"""
-Правила для опасных функций и инъекций.
-
-eval/exec — выполнение произвольного кода
-pickle / yaml.load — код при десериализации
-os.system / subprocess — command injections
-open(..., 'w') на пользовательском пути — риск записи произвольных файлов
-"""
-
 DANGEROUS_FUNCTIONS = {
-    # --- Прямое выполнение кода ---
     'eval': {
         'severity': 'CRITICAL',
         'message': 'eval() executes arbitrary code',
@@ -39,7 +29,6 @@ DANGEROUS_FUNCTIONS = {
         'recommendation': 'Validate input before importing modules dynamically'
     },
 
-    # --- Python десериализация ---
     'marshal.loads': {
         'severity': 'HIGH',
         'message': 'marshal loads arbitrary code objects',
@@ -59,7 +48,6 @@ DANGEROUS_FUNCTIONS = {
     },
 }
 
-# --- Опасная десериализация ---
 DANGEROUS_DESERIALIZATION = {
     'pickle': {
         'functions': ['loads', 'load'],
@@ -83,7 +71,6 @@ DANGEROUS_DESERIALIZATION = {
     },
 }
 
-# --- Опасные системные вызовы — командные инъекции ---
 COMMAND_INJECTION_SOURCES = {
     'os.system': {
         'severity': 'CRITICAL',
@@ -116,7 +103,6 @@ COMMAND_INJECTION_SOURCES = {
     },
 }
 
-# --- SQL injection (на уровне функций) ---
 SQL_INJECTION_SOURCES = {
     'cursor.execute': {
         'severity': 'HIGH',
@@ -131,7 +117,6 @@ SQL_INJECTION_SOURCES = {
     },
 }
 
-# --- Опасные операции с файлами ---
 FILE_OPERATION_RISKS = {
     'open_write': {
         'pattern': r'open\(.+,\s*[\'"]w[\'"]\)',

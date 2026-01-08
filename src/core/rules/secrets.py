@@ -1,16 +1,5 @@
-# """
-# Правила для поиска hardcoded секретов
-#
-# Основная идея — покрыть ключи реальных сервисов
-# + оставить универсальные паттерны (generic)
-#
-# Важно: лучше ложноположительное срабатывание, чем пропустить секрет.
-# """
-
 SECRET_PATTERNS = {
-    # ==========================
-    #  AWS
-    # ==========================
+    # AWS
     "aws_access_key": {
         "pattern": r"AKIA[0-9A-Z]{16}",
         "severity": "CRITICAL",
@@ -22,9 +11,7 @@ SECRET_PATTERNS = {
         "message": "AWS Secret Access Key found",
     },
 
-    # ==========================
-    #  GitHub / GitLab / OAuth
-    # ==========================
+    # GitHub / GitLab / OAuth
     "github_token": {
         "pattern": r"gh[pousr]_[0-9A-Za-z]{36}",
         "severity": "CRITICAL",
@@ -41,9 +28,7 @@ SECRET_PATTERNS = {
         "message": "OAuth client_secret found",
     },
 
-    # ==========================
-    #  Payments
-    # ==========================
+    # Payments
     "stripe_secret": {
         "pattern": r"sk_live_[0-9a-zA-Z]{24,}",
         "severity": "CRITICAL",
@@ -55,18 +40,14 @@ SECRET_PATTERNS = {
         "message": "Stripe Publishable Key found (not critical)",
     },
 
-    # ==========================
-    #  OpenAI
-    # ==========================
+    # OpenAI
     "openai_key": {
         "pattern": r"sk-[A-Za-z0-9]{48}",
         "severity": "HIGH",
         "message": "OpenAI API Key found",
     },
 
-    # ==========================
-    #  Telegram / Discord
-    # ==========================
+    # Telegram / Discord
     "telegram_bot_token": {
         "pattern": r"\d{6,12}:[A-Za-z0-9_-]{30,50}",
         "severity": "CRITICAL",
@@ -78,9 +59,7 @@ SECRET_PATTERNS = {
         "message": "Discord Bot Token found",
     },
 
-    # ==========================
-    #  Cloud vendors
-    # ==========================
+    # Cloud vendors
     "google_api_key": {
         "pattern": r"AIza[0-9A-Za-z\-_]{35}",
         "severity": "HIGH",
@@ -102,9 +81,7 @@ SECRET_PATTERNS = {
         "message": "DigitalOcean API Token found",
     },
 
-    # ==========================
-    #  Mail providers
-    # ==========================
+    # Mail providers
     "sendgrid_key": {
         "pattern": r"SG\.[A-Za-z0-9_-]{16,}\.[A-Za-z0-9_-]{16,}",
         "severity": "HIGH",
@@ -116,18 +93,14 @@ SECRET_PATTERNS = {
         "message": "Mailgun API Key found",
     },
 
-    # ==========================
-    #  Webhooks
-    # ==========================
+    # Webhooks
     "slack_webhook": {
         "pattern": r"https://hooks.slack.com/services/[A-Za-z0-9]+/[A-Za-z0-9]+/[A-Za-z0-9]+",
         "severity": "CRITICAL",
         "message": "Slack Webhook URL found",
     },
 
-    # ==========================
-    #  JWT / Secrets
-    # ==========================
+    # JWT / Secrets
     "jwt_token": {
         "pattern": r"eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}",
         "severity": "HIGH",
@@ -139,9 +112,7 @@ SECRET_PATTERNS = {
         "message": "JWT secret key found",
     },
 
-    # ==========================
-    #  SSH Keys / PEM / Certificates
-    # ==========================
+    # SSH Keys / PEM / Certificates
     "private_key_header": {
         "pattern": r"-----BEGIN (RSA |DSA |EC )?PRIVATE KEY-----",
         "severity": "CRITICAL",
@@ -153,18 +124,14 @@ SECRET_PATTERNS = {
         "message": "SSH RSA public key found",
     },
 
-    # ==========================
-    #  Databases / URLs
-    # ==========================
+    # Databases
     "database_url": {
         "pattern": r"(postgresql|mysql|mongodb):\/\/[^:]+:[^@]+@",
         "severity": "HIGH",
         "message": "Database URL with credentials",
     },
 
-    # ==========================
-    #  Generic patterns (универсальные)
-    # ==========================
+    # Generic patterns
     "generic_api_key": {
         "pattern": r"(api_key|apikey|api-key)\s*=\s*['\"][A-Za-z0-9_\-]{16,}['\"]",
         "severity": "HIGH",

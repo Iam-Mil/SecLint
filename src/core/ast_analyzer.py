@@ -5,10 +5,7 @@ from src.core.rules.injection import DANGEROUS_FUNCTIONS
 
 
 class ASTAnalyzer:
-
-
     def analyze(self, code: str, filepath: str) -> List[Dict]:
-
         tree = ast.parse(code)
 
         visitor = SecurityVisitor(code, filepath)
@@ -18,15 +15,12 @@ class ASTAnalyzer:
 
 
 class SecurityVisitor(ast.NodeVisitor):
-
-
     def __init__(self, code: str, filepath: str):
         self.code = code
         self.filepath = filepath
         self.issues = []
 
     def visit_Call(self, node):
-
         if isinstance(node.func, ast.Name):
             func_name = node.func.id
 
@@ -42,7 +36,6 @@ class SecurityVisitor(ast.NodeVisitor):
                 })
 
         if isinstance(node.func, ast.Attribute):
-
             attr_name = node.func.attr
 
             if attr_name in WEAK_CRYPTO_FUNCTIONS:
@@ -74,7 +67,6 @@ class SecurityVisitor(ast.NodeVisitor):
         self.generic_visit(node)
 
     def visit_JoinedStr(self, node):
-
         text_parts = []
         for value in node.values:
             if isinstance(value, ast.Constant):
@@ -96,7 +88,6 @@ class SecurityVisitor(ast.NodeVisitor):
         self.generic_visit(node)
 
     def _get_source(self, node):
-
         try:
             return ast.get_source_segment(self.code, node) or '<code unavailable>'
         except:

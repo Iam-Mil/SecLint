@@ -3,7 +3,6 @@ from pathlib import Path
 
 
 class ConsoleReporter:
-
     COLORS = {
         'CRITICAL': '\033[91m',  # red
         'HIGH': '\033[91m',      # red
@@ -22,7 +21,6 @@ class ConsoleReporter:
     }
 
     def report(self, results: Dict[str, List[Dict]]):
-
         if not results:
             print("✅ No security issues found!")
             return
@@ -62,7 +60,6 @@ class ConsoleReporter:
         print("="*80 + "\n")
 
     def _print_issue(self, issue: Dict, filepath: str):
-
         severity = issue.get('severity', 'LOW')
         color = self.COLORS.get(severity, '')
         reset = self.COLORS['RESET']

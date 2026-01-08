@@ -5,14 +5,11 @@ from src.core.regex_analyzer import RegexAnalyzer
 
 
 class SecurityScanner:
-
-
     def __init__(self):
         self.ast_analyzer = ASTAnalyzer()
         self.regex_analyzer = RegexAnalyzer()
 
     def scan_file(self, filepath: str) -> List[Dict]:
-
         filepath = Path(filepath)
 
         if not filepath.exists():
@@ -44,7 +41,6 @@ class SecurityScanner:
         return findings
 
     def scan_directory(self, dirpath: str) -> Dict[str, List[Dict]]:
-
         dirpath = Path(dirpath)
         results = {}
 
