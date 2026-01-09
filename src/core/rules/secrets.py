@@ -10,7 +10,6 @@ SECRET_PATTERNS = {
         "severity": "CRITICAL",
         "message": "AWS Secret Access Key found",
     },
-
     # GitHub / GitLab / OAuth
     "github_token": {
         "pattern": r"gh[pousr]_[0-9A-Za-z]{36}",
@@ -27,7 +26,6 @@ SECRET_PATTERNS = {
         "severity": "HIGH",
         "message": "OAuth client_secret found",
     },
-
     # Payments
     "stripe_secret": {
         "pattern": r"sk_live_[0-9a-zA-Z]{24,}",
@@ -39,14 +37,12 @@ SECRET_PATTERNS = {
         "severity": "MEDIUM",
         "message": "Stripe Publishable Key found (not critical)",
     },
-
     # OpenAI
     "openai_key": {
         "pattern": r"sk-[A-Za-z0-9]{48}",
         "severity": "HIGH",
         "message": "OpenAI API Key found",
     },
-
     # Telegram / Discord
     "telegram_bot_token": {
         "pattern": r"\d{6,12}:[A-Za-z0-9_-]{30,50}",
@@ -58,7 +54,6 @@ SECRET_PATTERNS = {
         "severity": "CRITICAL",
         "message": "Discord Bot Token found",
     },
-
     # Cloud vendors
     "google_api_key": {
         "pattern": r"AIza[0-9A-Za-z\-_]{35}",
@@ -80,7 +75,6 @@ SECRET_PATTERNS = {
         "severity": "HIGH",
         "message": "DigitalOcean API Token found",
     },
-
     # Mail providers
     "sendgrid_key": {
         "pattern": r"SG\.[A-Za-z0-9_-]{16,}\.[A-Za-z0-9_-]{16,}",
@@ -92,14 +86,12 @@ SECRET_PATTERNS = {
         "severity": "HIGH",
         "message": "Mailgun API Key found",
     },
-
     # Webhooks
     "slack_webhook": {
         "pattern": r"https://hooks.slack.com/services/[A-Za-z0-9]+/[A-Za-z0-9]+/[A-Za-z0-9]+",
         "severity": "CRITICAL",
         "message": "Slack Webhook URL found",
     },
-
     # JWT / Secrets
     "jwt_token": {
         "pattern": r"eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}",
@@ -111,7 +103,6 @@ SECRET_PATTERNS = {
         "severity": "HIGH",
         "message": "JWT secret key found",
     },
-
     # SSH Keys / PEM / Certificates
     "private_key_header": {
         "pattern": r"-----BEGIN (RSA |DSA |EC )?PRIVATE KEY-----",
@@ -123,14 +114,12 @@ SECRET_PATTERNS = {
         "severity": "CRITICAL",
         "message": "SSH RSA public key found",
     },
-
     # Databases
     "database_url": {
         "pattern": r"(postgresql|mysql|mongodb):\/\/[^:]+:[^@]+@",
         "severity": "HIGH",
         "message": "Database URL with credentials",
     },
-
     # Generic patterns
     "generic_api_key": {
         "pattern": r"(api_key|apikey|api-key)\s*=\s*['\"][A-Za-z0-9_\-]{16,}['\"]",
