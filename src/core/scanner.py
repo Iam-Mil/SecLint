@@ -13,12 +13,12 @@ class SecurityScanner:
         filepath = Path(filepath)
 
         if not filepath.exists():
-            return [{'error': f'File {filepath} not found'}]
+            return [{"error": f"File {filepath} not found"}]
 
-        if filepath.suffix != '.py':
-            return [{'error': 'Only .py files supported'}]
+        if filepath.suffix != ".py":
+            return [{"error": "Only .py files supported"}]
 
-        with open(filepath, 'r', encoding='utf-8') as f:
+        with open(filepath, "r", encoding="utf-8") as f:
             code = f.read()
 
         findings = []
@@ -28,15 +28,17 @@ class SecurityScanner:
         try:
             findings.extend(self.ast_analyzer.analyze(code, str(filepath)))
         except SyntaxError as e:
-            findings.append({
-                'type': 'syntax_error',
-                'severity': 'INFO',
-                'line': e.lineno or 0,
-                'message': f'Syntax error: {e.msg}',
-                'code': ''
-            })
+            findings.append(
+                {
+                    "type": "syntax_error",
+                    "severity": "INFO",
+                    "line": e.lineno or 0,
+                    "message": f"Syntax error: {e.msg}",
+                    "code": "",
+                }
+            )
 
-        findings.sort(key=lambda x: x.get('line', 0))
+        findings.sort(key=lambda x: x.get("line", 0))
 
         return findings
 
@@ -44,7 +46,7 @@ class SecurityScanner:
         dirpath = Path(dirpath)
         results = {}
 
-        for py_file in dirpath.rglob('*.py'):
+        for py_file in dirpath.rglob("*.py"):
             findings = self.scan_file(str(py_file))
             if findings:
                 results[str(py_file)] = findings
